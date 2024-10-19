@@ -31,7 +31,7 @@ class MainApp extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         locale: const Locale('ar'),
-        title: "القرآن  الكريم",
+        title: "القرآن الكريم",
         theme: ThemeData(
           fontFamily: "OttomanFont",
         ),
