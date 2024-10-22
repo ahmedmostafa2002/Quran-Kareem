@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/controller/controller.dart';
-import 'package:quran_kareem/main.dart';
-import 'package:quran_kareem/utiles/api/surahs.dart';
-import 'package:quran_kareem/utiles/drawer.dart';
-import 'package:quran_kareem/view/settings.dart';
-import 'package:quran_kareem/widgets/ayah.dart';
-import 'package:quran_kareem/widgets/search.dart';
-import 'package:quran_kareem/widgets/surah_head.dart';
+import 'package:alquran_alkareem/controller/controller.dart';
+import 'package:alquran_alkareem/main.dart';
+import 'package:alquran_alkareem/utiles/api/surahs.dart';
+import 'package:alquran_alkareem/utiles/drawer.dart';
+import 'package:alquran_alkareem/view/settings.dart';
+import 'package:alquran_alkareem/widgets/ayah.dart';
+import 'package:alquran_alkareem/widgets/search.dart';
+import 'package:alquran_alkareem/widgets/surah_head.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../utiles/api/quran_api.dart';

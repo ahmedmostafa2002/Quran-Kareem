@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/controller/controller.dart';
-import 'package:quran_kareem/utiles/api/surahs.dart';
-import 'package:quran_kareem/widgets/surah_info.dart';
+import '../controller/controller.dart';
+import './api/surahs.dart';
+import '../widgets/surah_info.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../main.dart';
@@ -45,7 +45,6 @@ class MyDrawer extends StatelessWidget {
                           controller.searchSurah(removeTashkeel(text));
                           text.isEmpty ? controller.clearSearchSurahs() : null;
                         },
-                        autofocus: true,
                         style: const TextStyle(color: bG),
                         controller: searchController,
                         decoration: InputDecoration(

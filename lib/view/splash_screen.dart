@@ -1,6 +1,6 @@
+import 'package:alquran_alkareem/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:quran_kareem/view/home.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

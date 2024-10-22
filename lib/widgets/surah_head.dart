@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/controller/controller.dart';
-import 'package:quran_kareem/utiles/api/quran_api.dart';
-import 'package:quran_kareem/widgets/ayah.dart';
+import 'package:alquran_alkareem/controller/controller.dart';
+import 'package:alquran_alkareem/utiles/api/quran_api.dart';
+import 'package:alquran_alkareem/widgets/ayah.dart';
 
 import '../utiles/values.dart';
 import '../utiles/screen_info.dart';

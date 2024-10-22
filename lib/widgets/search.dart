@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/widgets/ayah.dart';
+import 'package:alquran_alkareem/widgets/ayah.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../controller/controller.dart';
@@ -38,15 +38,24 @@ class SearchPage extends StatelessWidget {
           ),
           title: TextField(
               onChanged: (text) {
-                controller.searchAyah(removeTashkeel(text));
-                text.isEmpty ? controller.clearSearchAyah() : null;
-                WidgetsBinding.instance.addPostFrameCallback(
-                  (_) {
-                    if (controller.searchAyahText.isNotEmpty) {
-                      controller.searchScrollController.jumpTo(index: 0);
-                    }
-                  },
-                );
+                if (text.isEmpty) {
+                  controller.clearFilterAyahs();
+                } else {
+                  controller.clearFilterAyahs();
+                  for (int i = 0; i < ayahsApi.length; i++) {
+                    removeTashkeel(ayahsApi[i]['text'])
+                            .contains(removeTashkeel(text))
+                        ? controller.addToFilterAyahs(ayahsApi[i]['text'])
+                        : null;
+                  }
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) {
+                      if (controller.filterAyahs.isNotEmpty) {
+                        controller.searchScrollController.jumpTo(index: 0);
+                      }
+                    },
+                  );
+                }
               },
               autofocus: true,
               style: const TextStyle(color: bG),
@@ -60,7 +69,7 @@ class SearchPage extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   searchController.clear();
-                  controller.clearSearchAyah();
+                  controller.clearFilterAyahs();
                 },
                 icon: const Icon(
                   Icons.close,
@@ -69,16 +78,18 @@ class SearchPage extends StatelessWidget {
                 ))
           ],
         ),
-        body: ScrollablePositionedList.builder(
-          itemCount: ayahsApi.length,
-          itemScrollController: controller.searchScrollController,
-          itemBuilder: (context, index) {
-            return removeTashkeel(ayahsApi[index]["text"])
-                    .contains(controller.searchAyahText)
-                ? Ayah(ayahIndex: index)
-                : const SizedBox.shrink();
-          },
-        ),
+        body: controller.filterAyahs.isEmpty
+            ? const SizedBox.shrink()
+            : ScrollablePositionedList.builder(
+                itemCount: controller.filterAyahs.length,
+                itemScrollController: controller.searchScrollController,
+                itemBuilder: (context, index) {
+                  return Ayah(
+                      ayahIndex: ayahsApi.indexWhere((ayah) =>
+                          removeTashkeel(ayah["text"]) ==
+                          removeTashkeel(controller.filterAyahs[index])));
+                },
+              ),
       );
     });
   }

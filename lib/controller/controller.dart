@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:quran_kareem/main.dart';
+import 'package:alquran_alkareem/main.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Controller extends GetxController {
@@ -29,14 +29,14 @@ class Controller extends GetxController {
     update();
   }
 
-  String searchAyahText = '';
-  void searchAyah(String text) {
-    searchAyahText = text;
+  List filterAyahs = [];
+  void addToFilterAyahs(var ayahs) {
+    filterAyahs.add(ayahs);
     update();
   }
 
-  void clearSearchAyah() {
-    searchAyahText = '';
+  void clearFilterAyahs() {
+    filterAyahs.clear();
     update();
   }
 

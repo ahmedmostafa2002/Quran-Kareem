@@ -1,9 +1,10 @@
+import 'package:alquran_alkareem/controller/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/controller/controller.dart';
-import 'package:quran_kareem/main.dart';
-import 'package:quran_kareem/utiles/values.dart';
-import 'package:quran_kareem/utiles/screen_info.dart';
+import 'package:alquran_alkareem/utiles/values.dart';
+import 'package:alquran_alkareem/utiles/screen_info.dart';
+
+import '../main.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -47,7 +48,17 @@ class Settings extends StatelessWidget {
                     child: Text(
                       'حجم الخط',
                       style: TextStyle(
-                          fontSize: fontSize,
+                          fontSize: controller.fontSize == 1
+                              ? 20
+                              : controller.fontSize == 1.8
+                                  ? 22
+                                  : controller.fontSize == 2.6
+                                      ? 26
+                                      : controller.fontSize == 3.4
+                                          ? 30
+                                          : controller.fontSize == 4.2
+                                              ? 34
+                                              : 38,
                           fontWeight: FontWeight.bold,
                           color: controller.isDarkMode == true
                               ? bG
@@ -72,7 +83,17 @@ class Settings extends StatelessWidget {
                         Text(
                           'المظهر',
                           style: TextStyle(
-                              fontSize: fontSize,
+                              fontSize: controller.fontSize == 1
+                                  ? 20
+                                  : controller.fontSize == 1.8
+                                      ? 22
+                                      : controller.fontSize == 2.6
+                                          ? 26
+                                          : controller.fontSize == 3.4
+                                              ? 30
+                                              : controller.fontSize == 4.2
+                                                  ? 34
+                                                  : 38,
                               fontWeight: FontWeight.bold,
                               color: controller.isDarkMode == true
                                   ? bG

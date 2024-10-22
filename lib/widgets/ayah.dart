@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quran_kareem/utiles/api/quran_api.dart';
-import 'package:quran_kareem/utiles/tafsir.dart';
+import 'package:alquran_alkareem/utiles/api/quran_api.dart';
+import 'package:alquran_alkareem/utiles/tafsir.dart';
 
 import '../controller/controller.dart';
 import '../main.dart';
@@ -20,7 +20,9 @@ class Ayah extends StatefulWidget {
 class _AyahState extends State<Ayah> {
   @override
   Widget build(BuildContext context) {
-    Get.put(Controller(), permanent: true);
+    Get.put(
+      Controller(),
+    );
     return GetBuilder<Controller>(builder: (controller) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,12 +32,22 @@ class _AyahState extends State<Ayah> {
             highlightColor: Colors.amber[100],
             onLongPress: () {
               controller.setTafsirAyahIndex(widget.ayahIndex);
-              tafsir;
+              Get.bottomSheet(tafsir);
             },
             child: Text(
               "${ayahsApi[widget.ayahIndex]['text']}\uFD3F${ayahsApi[widget.ayahIndex]['numberInSurah']}\uFD3E",
               style: TextStyle(
-                  fontSize: fontSize,
+                  fontSize: controller.fontSize == 1
+                      ? 20
+                      : controller.fontSize == 1.8
+                          ? 22
+                          : controller.fontSize == 2.6
+                              ? 26
+                              : controller.fontSize == 3.4
+                                  ? 30
+                                  : controller.fontSize == 4.2
+                                      ? 34
+                                      : 38,
                   color: controller.isDarkMode == true ? bG : Colors.black),
               textAlign: TextAlign.start,
             ),
@@ -49,7 +61,7 @@ class _AyahState extends State<Ayah> {
                         controller.scrollController
                             .jumpTo(index: widget.ayahIndex);
                         Navigator.pop(context);
-                        controller.clearSearchAyah();
+                        controller.clearFilterAyahs();
                         controller.checkSearch(false);
                       },
                       child: const Text(

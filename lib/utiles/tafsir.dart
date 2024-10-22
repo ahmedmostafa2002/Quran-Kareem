@@ -8,7 +8,7 @@ import 'values.dart';
 import 'screen_info.dart';
 
 Controller controller = Get.put(Controller(), permanent: true);
-Future<dynamic> tafsir = Get.bottomSheet(BottomSheet(
+BottomSheet tafsir = BottomSheet(
   onClosing: () {},
   elevation: 10,
   backgroundColor: controller.isDarkMode == true
@@ -75,7 +75,17 @@ Future<dynamic> tafsir = Get.bottomSheet(BottomSheet(
                   tafsirMuyassar[myController.tafsirAyahIndesx]["text"]
                       .toString(),
                   style: TextStyle(
-                    fontSize: fontSize,
+                    fontSize: controller.fontSize == 1
+                        ? 20
+                        : controller.fontSize == 1.8
+                            ? 22
+                            : controller.fontSize == 2.6
+                                ? 26
+                                : controller.fontSize == 3.4
+                                    ? 30
+                                    : controller.fontSize == 4.2
+                                        ? 34
+                                        : 38,
                     color: controller.isDarkMode == true ? bG : Colors.black,
                   ),
                   textAlign: TextAlign.start)
@@ -85,4 +95,4 @@ Future<dynamic> tafsir = Get.bottomSheet(BottomSheet(
       );
     });
   },
-));
+);
