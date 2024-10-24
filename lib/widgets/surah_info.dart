@@ -1,14 +1,15 @@
+import 'package:alquran_alkareem/models/surah_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/controller/controller.dart';
-import 'package:alquran_alkareem/utiles/api/quran_api.dart';
-import 'package:alquran_alkareem/utiles/api/surahs.dart';
+import 'package:alquran_alkareem/data/api/quran_api.dart';
 
 import '../utiles/values.dart';
 import '../utiles/screen_info.dart';
 
 class SurahInfo extends StatelessWidget {
-  const SurahInfo({super.key, required this.index});
+  const SurahInfo({super.key, required this.index, required this.surahModel});
+  final SurahModel surahModel;
   final int index;
 
   @override
@@ -18,7 +19,7 @@ class SurahInfo extends StatelessWidget {
         onTap: () {
           for (int i = 0; i < ayahsApi.length; i++) {
             ayahsApi[i]['numberInSurah'] == 1 &&
-                    surahsApi[index]["name"] == ayahsApi[i]["name"]
+                    surahModel.name == ayahsApi[i]["name"]
                 ? controller.setAyahIndex(i)
                 : null;
           }
@@ -49,7 +50,7 @@ class SurahInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    surahsApi[index]["number"].toString(),
+                    surahModel.page.toString(),
                     style: TextStyle(
                         color: index == controller.surahIndex
                             ? Colors.black
@@ -61,13 +62,13 @@ class SurahInfo extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(surahsApi[index]["name"],
+                      Text(surahModel.name,
                           style: TextStyle(
                               color: index == controller.surahIndex
                                   ? Colors.black
                                   : Colors.white)),
                       Text(
-                          surahsApi[index]["revelationType"] == 'Meccan'
+                          surahModel.revelationType == 'Meccan'
                               ? 'مكيه'
                               : 'مدنيه',
                           style: TextStyle(
@@ -86,7 +87,7 @@ class SurahInfo extends StatelessWidget {
                           color: index == controller.surahIndex
                               ? Colors.black
                               : Colors.white)),
-                  Text("${surahsApi[index]["numberOfAyahs"]}",
+                  Text(surahModel.numberOfAyahs,
                       style: TextStyle(
                           color: index == controller.surahIndex
                               ? Colors.black
@@ -101,7 +102,7 @@ class SurahInfo extends StatelessWidget {
                           color: index == controller.surahIndex
                               ? Colors.black
                               : Colors.white)),
-                  Text("${surahsApi[index]["page"]}",
+                  Text(surahModel.page,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: index == controller.surahIndex

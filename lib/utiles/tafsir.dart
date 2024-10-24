@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/controller.dart';
-import 'api/quran_api.dart';
-import 'api/tafsir_muyassar.dart';
+import '../data/api/quran_api.dart';
+import '../data/api/tafsir_muyassar.dart';
 import 'values.dart';
 import 'screen_info.dart';
 

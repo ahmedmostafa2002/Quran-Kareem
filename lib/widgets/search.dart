@@ -5,7 +5,8 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../controller/controller.dart';
 import '../main.dart';
-import '../utiles/api/quran_api.dart';
+import '../data/api/quran_api.dart';
+import '../models/aya_model.dart';
 import '../utiles/values.dart';
 
 class SearchPage extends StatelessWidget {
@@ -85,9 +86,21 @@ class SearchPage extends StatelessWidget {
                 itemScrollController: controller.searchScrollController,
                 itemBuilder: (context, index) {
                   return Ayah(
-                      ayahIndex: ayahsApi.indexWhere((ayah) =>
-                          removeTashkeel(ayah["text"]) ==
-                          removeTashkeel(controller.filterAyahs[index])));
+                      ayahModel: AyaModel(
+                          surahName: ayahsApi[ayahsApi.indexWhere((ayah) =>
+                                  removeTashkeel(ayah["text"]) ==
+                                  removeTashkeel(controller.filterAyahs[index]))]
+                              ["name"],
+                          ayahText:
+                              ayahsApi[ayahsApi.indexWhere((ayah) => removeTashkeel(ayah["text"]) == removeTashkeel(controller.filterAyahs[index]))]
+                                  ["text"],
+                          ayaNumber:
+                              ayahsApi[ayahsApi.indexWhere((ayah) => removeTashkeel(ayah["text"]) == removeTashkeel(controller.filterAyahs[index]))]
+                                      ["numberInSurah"]
+                                  .toString(),
+                          page: ayahsApi[ayahsApi.indexWhere((ayah) => removeTashkeel(ayah["text"]) == removeTashkeel(controller.filterAyahs[index]))]["page"].toString(),
+                          juz: ayahsApi[ayahsApi.indexWhere((ayah) => removeTashkeel(ayah["text"]) == removeTashkeel(controller.filterAyahs[index]))]["juz"].toString()),
+                      ayahIndex: ayahsApi.indexWhere((ayah) => removeTashkeel(ayah["text"]) == removeTashkeel(controller.filterAyahs[index])));
                 },
               ),
       );

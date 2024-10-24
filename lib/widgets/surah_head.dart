@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/controller/controller.dart';
-import 'package:alquran_alkareem/utiles/api/quran_api.dart';
+import 'package:alquran_alkareem/data/api/quran_api.dart';
 import 'package:alquran_alkareem/widgets/ayah.dart';
 
+import '../models/aya_model.dart';
 import '../utiles/values.dart';
 import '../utiles/screen_info.dart';
 
@@ -55,7 +56,14 @@ class SurahHead extends StatelessWidget {
           SizedBox(
             height: ScreenInfo.height(context) / 34,
           ),
-          Ayah(ayahIndex: ayahIndex)
+          Ayah(
+              ayahIndex: ayahIndex,
+              ayahModel: AyaModel(
+                  surahName: ayahsApi[ayahIndex]["name"],
+                  ayahText: ayahsApi[ayahIndex]["text"],
+                  ayaNumber: ayahsApi[ayahIndex]["numberInSurah"].toString(),
+                  page: ayahsApi[ayahIndex]["page"].toString(),
+                  juz: ayahsApi[ayahIndex]["juz"].toString()))
         ],
       );
     });

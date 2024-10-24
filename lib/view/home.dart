@@ -1,16 +1,17 @@
+import 'package:alquran_alkareem/models/aya_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/controller/controller.dart';
 import 'package:alquran_alkareem/main.dart';
-import 'package:alquran_alkareem/utiles/api/surahs.dart';
-import 'package:alquran_alkareem/utiles/drawer.dart';
+import 'package:alquran_alkareem/data/api/surahs.dart';
+import 'package:alquran_alkareem/widgets/drawer.dart';
 import 'package:alquran_alkareem/view/settings.dart';
 import 'package:alquran_alkareem/widgets/ayah.dart';
 import 'package:alquran_alkareem/widgets/search.dart';
 import 'package:alquran_alkareem/widgets/surah_head.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../utiles/api/quran_api.dart';
+import '../data/api/quran_api.dart';
 import '../utiles/values.dart';
 
 class HomePage extends StatefulWidget {
@@ -109,14 +110,22 @@ class _HomePageState extends State<HomePage> {
             initialScrollIndex: sharedPref.getInt("ayahsIndex") == null
                 ? 0
                 : sharedPref.getInt("ayahsIndex")!,
-            //ListView.builder(
             itemCount: ayahsApi.length,
             itemBuilder: (context, index) {
               return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ayahsApi[index]["numberInSurah"] == 1
                       ? SurahHead(ayahIndex: index)
-                      : Ayah(ayahIndex: index));
+                      : Ayah(
+                          ayahIndex: index,
+                          ayahModel: AyaModel(
+                              surahName: ayahsApi[index]["name"],
+                              ayahText: ayahsApi[index]["text"],
+                              ayaNumber:
+                                  ayahsApi[index]["numberInSurah"].toString(),
+                              page: ayahsApi[index]["page"].toString(),
+                              juz: ayahsApi[index]["juz"].toString()),
+                        ));
             },
           )));
     });

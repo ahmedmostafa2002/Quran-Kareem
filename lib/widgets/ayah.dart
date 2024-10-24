@@ -1,6 +1,6 @@
+import 'package:alquran_alkareem/models/aya_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:alquran_alkareem/utiles/api/quran_api.dart';
 import 'package:alquran_alkareem/utiles/tafsir.dart';
 
 import '../controller/controller.dart';
@@ -8,16 +8,12 @@ import '../main.dart';
 import '../utiles/values.dart';
 import '../utiles/screen_info.dart';
 
-class Ayah extends StatefulWidget {
-  const Ayah({super.key, required this.ayahIndex});
+class Ayah extends StatelessWidget {
+  const Ayah({super.key, required this.ayahModel, required this.ayahIndex});
 
+  final AyaModel ayahModel;
   final int ayahIndex;
 
-  @override
-  State<Ayah> createState() => _AyahState();
-}
-
-class _AyahState extends State<Ayah> {
   @override
   Widget build(BuildContext context) {
     Get.put(
@@ -31,11 +27,11 @@ class _AyahState extends State<Ayah> {
             onTap: () {},
             highlightColor: Colors.amber[100],
             onLongPress: () {
-              controller.setTafsirAyahIndex(widget.ayahIndex);
+              controller.setTafsirAyahIndex(ayahIndex);
               Get.bottomSheet(tafsir);
             },
             child: Text(
-              "${ayahsApi[widget.ayahIndex]['text']}\uFD3F${ayahsApi[widget.ayahIndex]['numberInSurah']}\uFD3E",
+              "${ayahModel.ayahText}\uFD3F${ayahModel.ayaNumber}\uFD3E",
               style: TextStyle(
                   fontSize: controller.fontSize == 1
                       ? 20
@@ -58,8 +54,7 @@ class _AyahState extends State<Ayah> {
               controller.searchOn == true
                   ? TextButton(
                       onPressed: () {
-                        controller.scrollController
-                            .jumpTo(index: widget.ayahIndex);
+                        controller.scrollController.jumpTo(index: ayahIndex);
                         Navigator.pop(context);
                         controller.clearFilterAyahs();
                         controller.checkSearch(false);
@@ -70,17 +65,15 @@ class _AyahState extends State<Ayah> {
                       ))
                   : IconButton(
                       onPressed: () async {
-                        controller.ayahsIndex != widget.ayahIndex
-                            ? controller.savePosition(widget.ayahIndex)
+                        controller.ayahsIndex != ayahIndex
+                            ? controller.savePosition(ayahIndex)
                             : controller.savePosition(-1);
                         sharedPref.getInt("ayahsIndex") == null ||
-                                sharedPref.getInt("ayahsIndex") !=
-                                    widget.ayahIndex
-                            ? await sharedPref.setInt(
-                                "ayahsIndex", widget.ayahIndex)
+                                sharedPref.getInt("ayahsIndex") != ayahIndex
+                            ? await sharedPref.setInt("ayahsIndex", ayahIndex)
                             : sharedPref.remove("ayahsIndex");
                       },
-                      icon: Icon(controller.ayahsIndex == widget.ayahIndex
+                      icon: Icon(controller.ayahsIndex == ayahIndex
                           ? Icons.bookmark
                           : Icons.bookmark_border_outlined),
                       color: secondryBG,
@@ -110,7 +103,7 @@ class _AyahState extends State<Ayah> {
                       width: 14,
                     ),
                     Text(
-                      " ${ayahsApi[widget.ayahIndex]['page']}",
+                      " ${ayahModel.page}",
                       style: const TextStyle(color: Colors.white),
                     ),
                   ],
@@ -127,13 +120,13 @@ class _AyahState extends State<Ayah> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${ayahsApi[widget.ayahIndex]["name"]}",
+                      Text(ayahModel.surahName,
                           style: const TextStyle(color: Colors.white)),
                       const SizedBox(
                         width: 14,
                       ),
                       Text(
-                        "رقم الجزء ${ayahsApi[widget.ayahIndex]['juz']}",
+                        "رقم الجزء ${ayahModel.juz}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ],

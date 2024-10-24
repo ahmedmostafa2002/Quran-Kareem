@@ -1,13 +1,13 @@
+import 'package:alquran_alkareem/models/surah_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/controller.dart';
-import './api/surahs.dart';
-import '../widgets/surah_info.dart';
+import '../data/api/surahs.dart';
+import 'surah_info.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-
 import '../main.dart';
-import 'values.dart';
-import 'screen_info.dart';
+import '../utiles/values.dart';
+import '../utiles/screen_info.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -77,7 +77,17 @@ class MyDrawer extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return removeTashkeel(surahsApi[index]['name'])
                           .contains(controller.searchSurahText)
-                      ? SurahInfo(index: index)
+                      ? SurahInfo(
+                          index: index,
+                          surahModel: SurahModel(
+                              name: surahsApi[index]["name"],
+                              number: surahsApi[index]["number"].toString(),
+                              revelationType: surahsApi[index]
+                                  ["revelationType"],
+                              numberOfAyahs:
+                                  surahsApi[index]["numberOfAyahs"].toString(),
+                              page: surahsApi[index]['page'].toString()),
+                        )
                       : const SizedBox.shrink();
                 },
               ),
