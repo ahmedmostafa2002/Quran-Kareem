@@ -1,3 +1,4 @@
+import 'package:alquran_alkareem/utiles/my_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/controller/controller.dart';
@@ -6,7 +7,6 @@ import 'package:alquran_alkareem/widgets/ayah.dart';
 
 import '../models/aya_model.dart';
 import '../utiles/values.dart';
-import '../utiles/screen_info.dart';
 
 class SurahHead extends StatelessWidget {
   const SurahHead({super.key, required this.ayahIndex});
@@ -21,9 +21,9 @@ class SurahHead extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: ScreenInfo.isPortrait(context)
-                ? ScreenInfo.height(context) / 10
-                : ScreenInfo.width(context) / 10,
+            height: context.isPortrait
+                ? context.screenHeight / 10
+                : context.screenWidth / 10,
             margin: const EdgeInsets.symmetric(
               vertical: 16,
             ),
@@ -54,7 +54,7 @@ class SurahHead extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
           SizedBox(
-            height: ScreenInfo.height(context) / 34,
+            height: context.screenHeight / 34,
           ),
           Ayah(
               ayahIndex: ayahIndex,

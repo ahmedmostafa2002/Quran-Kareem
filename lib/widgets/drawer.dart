@@ -1,4 +1,5 @@
 import 'package:alquran_alkareem/models/surah_model.dart';
+import 'package:alquran_alkareem/utiles/my_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/controller.dart';
@@ -7,7 +8,6 @@ import 'surah_info.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../main.dart';
 import '../utiles/values.dart';
-import '../utiles/screen_info.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
             ? const Color.fromARGB(255, 52, 58, 64)
             : bG,
         elevation: 10,
-        width: ScreenInfo.width(context) / 1.1,
+        width: context.screenWidth / 1.1,
         child: SafeArea(child: GetBuilder<Controller>(
           builder: (controller) {
             return Scaffold(

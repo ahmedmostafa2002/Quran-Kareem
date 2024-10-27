@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 class ScreenInfo {
   static double height(BuildContext context) {
@@ -13,3 +13,4 @@ class ScreenInfo {
     return MediaQuery.of(context).orientation == Orientation.portrait;
   }
 }
+*/

@@ -1,4 +1,5 @@
 import 'package:alquran_alkareem/models/aya_model.dart';
+import 'package:alquran_alkareem/utiles/my_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/utiles/tafsir.dart';
@@ -6,7 +7,6 @@ import 'package:alquran_alkareem/utiles/tafsir.dart';
 import '../controller/controller.dart';
 import '../main.dart';
 import '../utiles/values.dart';
-import '../utiles/screen_info.dart';
 
 class Ayah extends StatelessWidget {
   const Ayah({super.key, required this.ayahModel, required this.ayahIndex});
@@ -87,9 +87,9 @@ class Ayah extends StatelessWidget {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
-                height: ScreenInfo.isPortrait(context)
-                    ? ScreenInfo.height(context) / 24
-                    : ScreenInfo.width(context) / 24,
+                height: context.isPortrait
+                    ? context.screenHeight / 24
+                    : context.screenWidth / 24,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: secondryBG,
@@ -111,9 +111,9 @@ class Ayah extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(4),
-                height: ScreenInfo.isPortrait(context)
-                    ? ScreenInfo.height(context) / 24
-                    : ScreenInfo.width(context) / 24,
+                height: context.isPortrait
+                    ? context.screenHeight / 24
+                    : context.screenWidth / 24,
                 color: secondryBG,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

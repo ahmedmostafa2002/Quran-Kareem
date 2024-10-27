@@ -1,8 +1,8 @@
 import 'package:alquran_alkareem/controller/controller.dart';
+import 'package:alquran_alkareem/utiles/my_extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran_alkareem/utiles/values.dart';
-import 'package:alquran_alkareem/utiles/screen_info.dart';
 
 import '../main.dart';
 
@@ -137,12 +137,12 @@ class Settings extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: ScreenInfo.isPortrait(context)
-                        ? ScreenInfo.height(context) / 10
-                        : ScreenInfo.width(context) / 10,
+                    height: context.isPortrait
+                        ? context.screenHeight / 10
+                        : context.screenWidth / 10,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     margin: EdgeInsets.only(
-                      top: ScreenInfo.height(context) / 2.6,
+                      top: context.screenHeight / 2.6,
                     ),
                     child: ElevatedButton(
                         onPressed: () async {

@@ -5,7 +5,7 @@ import 'package:alquran_alkareem/controller/controller.dart';
 import 'package:alquran_alkareem/data/api/quran_api.dart';
 
 import '../utiles/values.dart';
-import '../utiles/screen_info.dart';
+import '../utiles/my_extention.dart';
 
 class SurahInfo extends StatelessWidget {
   const SurahInfo({super.key, required this.index, required this.surahModel});
@@ -34,9 +34,9 @@ class SurahInfo extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(12),
           padding: const EdgeInsets.symmetric(vertical: 2),
-          height: ScreenInfo.isPortrait(context)
-              ? ScreenInfo.height(context) / 14
-              : ScreenInfo.width(context) / 14,
+          height: context.isPortrait
+              ? context.screenHeight / 14
+              : context.screenWidth / 14,
           decoration: BoxDecoration(
             color:
                 index == controller.surahIndex ? Colors.amber[50] : secondryBG,
