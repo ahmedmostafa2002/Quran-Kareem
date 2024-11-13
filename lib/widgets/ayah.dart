@@ -16,9 +16,7 @@ class Ayah extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(
-      Controller(),
-    );
+    Get.put(Controller(), permanent: true);
     return GetBuilder<Controller>(builder: (controller) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,7 +55,6 @@ class Ayah extends StatelessWidget {
                         controller.scrollController.jumpTo(index: ayahIndex);
                         Navigator.pop(context);
                         controller.clearFilterAyahs();
-                        controller.checkSearch(false);
                       },
                       child: const Text(
                         "الانتقال الي الأيه",

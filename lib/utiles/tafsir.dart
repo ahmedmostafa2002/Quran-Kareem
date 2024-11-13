@@ -7,8 +7,7 @@ import '../data/api/quran_api.dart';
 import '../data/api/tafsir_muyassar.dart';
 import 'values.dart';
 
-Controller controller = Get.put(Controller(), permanent: true);
-var tafsir = GetBuilder<Controller>(
+GetBuilder<Controller> tafsir = GetBuilder<Controller>(
   builder: (myController) {
     return BottomSheet(
         onClosing: () {},
@@ -33,8 +32,9 @@ var tafsir = GetBuilder<Controller>(
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color:
-                            controller.isDarkMode == true ? bG : Colors.black),
+                        color: myController.isDarkMode == true
+                            ? bG
+                            : Colors.black),
                   ),
                   const SizedBox(
                     height: 16,
@@ -77,19 +77,19 @@ var tafsir = GetBuilder<Controller>(
                       tafsirMuyassar[myController.tafsirAyahIndesx]["text"]
                           .toString(),
                       style: TextStyle(
-                        fontSize: controller.fontSize == 1
+                        fontSize: myController.fontSize == 1
                             ? 20
-                            : controller.fontSize == 1.8
+                            : myController.fontSize == 1.8
                                 ? 22
-                                : controller.fontSize == 2.6
+                                : myController.fontSize == 2.6
                                     ? 26
-                                    : controller.fontSize == 3.4
+                                    : myController.fontSize == 3.4
                                         ? 30
-                                        : controller.fontSize == 4.2
+                                        : myController.fontSize == 4.2
                                             ? 34
                                             : 38,
                         color:
-                            controller.isDarkMode == true ? bG : Colors.black,
+                            myController.isDarkMode == true ? bG : Colors.black,
                       ),
                       textAlign: TextAlign.start)
                 ],

@@ -9,16 +9,37 @@ import '../data/api/quran_api.dart';
 import '../models/aya_model.dart';
 import '../utiles/values.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({
     super.key,
   });
 
   @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  Controller controller = Get.put(
+    Controller(),
+  );
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.checkSearch(true);
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Future.delayed(Duration.zero, () {
+    controller.checkSearch(false);
+  });
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Get.put(
-      Controller(),
-    );
     TextEditingController searchController = TextEditingController();
 
     return GetBuilder<Controller>(builder: (controller) {
@@ -32,7 +53,6 @@ class SearchPage extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
-              controller.checkSearch(false);
               searchController.clear();
             },
             icon: const Icon(Icons.arrow_back_ios),

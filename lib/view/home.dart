@@ -79,7 +79,6 @@ class _HomePageState extends State<HomePage> {
             actions: [
               IconButton(
                   onPressed: () {
-                    controller.checkSearch(true);
                     Get.to(const SearchPage());
                   },
                   icon: const Icon(
