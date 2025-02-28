@@ -131,9 +131,9 @@ class Settings extends StatelessWidget {
                             snackPosition: SnackPosition.BOTTOM);
                       }
                     },
-                    child: const Text(
+                    child:  Text(
                       "الذهاب الي الايه المحفوظه",
-                      style: TextStyle(fontSize: 22, color: secondryBG),
+                      style: TextStyle(fontSize: 22, color: controller.isDarkMode == true ?Colors.white:secondryBG),
                     ),
                   ),
                   Container(
